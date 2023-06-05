@@ -14,5 +14,4 @@ Open command line on project path and up docker-compose
 ```bash
   docker-compose up
 ```
-  
-## API Usage
+

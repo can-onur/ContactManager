@@ -1,4 +1,6 @@
 using ContactManager.Infrastructure;
+using ContactManager.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace ContactManager.Api
 {
@@ -21,6 +23,14 @@ namespace ContactManager.Api
 
             var app = builder.Build();
 
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+
+                var context = services.GetRequiredService<ContactManagerDbContext>();
+                context.Database.Migrate();
+            }
+            
             app.UseCors(builder => builder
              .AllowAnyOrigin()
              .AllowAnyMethod()
