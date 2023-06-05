@@ -1,0 +1,22 @@
+{
+  "Routes": [
+    {
+      "SwaggerKey": "report",
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "report.api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/reportmanager/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+version: '3.4'
+name: contact
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+
+  mongodb:
+    image: mongo:6.0
+  
+  mongo-express:
+     image: mongo-express
+
+  postgres:
+     image: postgres
+
+  contact.manager.api:
+    image: ${DOCKER_REGISTRY-}contactapi
+    build:
+      context: .
+      dockerfile: services/contact/src/ContactManager.Api/Dockerfile
+
+  report.api:
+    image: ${DOCKER_REGISTRY-}reportapi
+    build:
+      context: .
+      dockerfile: services/report/src/Report.Api/Dockerfile
+
+  gateway:
+    image: ${DOCKER_REGISTRY-}gateway
+    build:
+      context: .
+      dockerfile: services/gateway/src/Gateway/Dockerfile
+

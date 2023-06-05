@@ -1,0 +1,22 @@
+{
+  "Routes": [
+    {
+      "SwaggerKey": "contactmanager",
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "contact.manager.api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/contactmanager/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ]
+    }
+  ]
+}

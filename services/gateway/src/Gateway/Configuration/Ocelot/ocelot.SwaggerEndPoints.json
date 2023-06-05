@@ -1,0 +1,24 @@
+{
+  "SwaggerEndPoints": [
+    {
+      "Key": "contactmanager",
+      "Config": [
+        {
+          "Name": "Contact Manager API",
+          "Version": "v1",
+          "Url": "http://contact.manager.api/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "report",
+      "Config": [
+        {
+          "Name": "Reports API",
+          "Version": "v1",
+          "Url": "http://report.api/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ]
+}
