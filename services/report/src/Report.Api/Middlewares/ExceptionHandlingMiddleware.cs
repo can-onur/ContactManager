@@ -48,7 +48,7 @@ namespace Report.Api.Middlewares
                     break;
             }
 
-            context.Response.ContentType = "text/plain; charset=utf-8";
+            context.Response.ContentType = "application/json";
 
             context.Response.StatusCode = (int)statusCode;
 
