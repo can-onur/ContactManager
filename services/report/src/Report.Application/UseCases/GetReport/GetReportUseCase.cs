@@ -17,6 +17,12 @@ namespace Report.Application.UseCases.GetReport
         public async Task<GetReportResponse> Handle(GetReportRequest request, CancellationToken cancellationToken)
         {
             var report = await _locationReportRepository.GetByIdAsync(request.Id);
+
+            if (report == null)
+            {
+                throw new NotFoundException(NotFoundMessages.LocationReportNotFound);
+            }
+
             var response = new GetReportResponse
             {
                 Id = report.Id,
