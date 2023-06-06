@@ -12,7 +12,7 @@ namespace Report.Api.Controllers
     [Route("api/[controller]")]
     public class ReportController : ControllerBase
     {
- 
+
         private readonly IMediator _mediator;
 
         public ReportController(IMediator mediator)
@@ -29,19 +29,8 @@ namespace Report.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult> Get()
         {
-            try
-            {
-                var response = await _mediator.Send(new GetAllReportsRequest() {  });
-                return Ok(response);
-            }
-            catch (NotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var response = await _mediator.Send(new GetAllReportsRequest() { });
+            return Ok(response);
         }
         /// <summary>
         /// Get the report for the specified id.
@@ -53,20 +42,8 @@ namespace Report.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult> Get([FromRoute] Guid id)
         {
-            try
-            {
-                var response = await _mediator.Send(new GetReportRequest() { Id = id });
-                return Ok(response);
-
-            }
-            catch (NotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var response = await _mediator.Send(new GetReportRequest() { Id = id });
+            return Ok(response);
         }
 
         /// <summary>
@@ -76,16 +53,8 @@ namespace Report.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<Guid>> Create([FromBody] CreateReportRequest item)
         {
-            try
-            {
-                var response = await _mediator.Send(item);
-
-                return Ok(response);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var response = await _mediator.Send(item);
+            return Ok(response);
         }
     }
 }
