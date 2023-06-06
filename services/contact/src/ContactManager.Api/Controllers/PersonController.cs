@@ -5,7 +5,6 @@ using ContactManager.Application.UseCases.DeletePerson;
 using ContactManager.Application.UseCases.GetAllContacts;
 using ContactManager.Application.UseCases.GetAllPersons;
 using ContactManager.Application.UseCases.GetPerson;
-using ContactManager.Domain.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -33,20 +32,9 @@ namespace ContactManager.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<ActionResult> Get()
         {
-            try
-            {
-                var response = await _mediator.Send(new GetAllPersonsRequest() { });
+            var response = await _mediator.Send(new GetAllPersonsRequest() { });
 
-                return Ok(response);
-            }
-            catch (NotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return Ok(response);
         }
         /// <summary>
         /// Get the person for the specified id.
@@ -59,20 +47,9 @@ namespace ContactManager.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult> Get([FromRoute] Guid id)
         {
-            try
-            {
-                var response = await _mediator.Send(new GetPersonRequest() { Id = id });
-                return Ok(response);
+            var response = await _mediator.Send(new GetPersonRequest() { Id = id });
+            return Ok(response);
 
-            }
-            catch (NotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
         }
 
         /// <summary>
@@ -84,16 +61,9 @@ namespace ContactManager.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult<CreatePersonResponse>> Create([FromBody] CreatePersonRequest item)
         {
-            try
-            {
-                var response = await _mediator.Send(item);
+            var response = await _mediator.Send(item);
 
-                return Ok(response);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return Ok(response);
         }
 
 
@@ -108,21 +78,9 @@ namespace ContactManager.Api.Controllers
         public async Task<ActionResult> Delete([FromRoute] Guid id)
         {
 
-            try
-            {
-                var response = await _mediator.Send(new DeletePersonRequest() { Id = id });
+            var response = await _mediator.Send(new DeletePersonRequest() { Id = id });
 
-                return Ok(response);
-
-            }
-            catch (NotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return Ok(response);
         }
 
         /// <summary>
@@ -134,17 +92,10 @@ namespace ContactManager.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult<GetAllContactsResponse>> GetContacts()
         {
-            try
-            {
-               
-                var response = await _mediator.Send(new GetAllContactsRequest());
 
-                return Ok(response);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var response = await _mediator.Send(new GetAllContactsRequest());
+
+            return Ok(response);
         }
 
         /// <summary>
@@ -156,18 +107,11 @@ namespace ContactManager.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult<CreateContactResponse>> Create([FromRoute] Guid personId, [FromBody] CreateContactRequest item)
         {
-            try
-            {
-                item.PersonId = personId;
+            item.PersonId = personId;
 
-                var response = await _mediator.Send(item);
+            var response = await _mediator.Send(item);
 
-                return Ok(response);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return Ok(response);
         }
         /// <summary>
         /// Delete existing contact information of specified person.
@@ -179,20 +123,9 @@ namespace ContactManager.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult> Delete([FromRoute] Guid personId, Guid id)
         {
-            try
-            {
-                var response = await _mediator.Send(new DeleteContactRequest() { Id = id, PersonId = personId });
+            var response = await _mediator.Send(new DeleteContactRequest() { Id = id, PersonId = personId });
 
-                return Ok(response);
-            }
-            catch (NotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return Ok(response);
         }
     }
 }

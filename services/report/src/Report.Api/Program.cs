@@ -1,3 +1,5 @@
+using Report.Api.Middlewares;
+
 namespace Report.Api
 {
     public class Program
@@ -17,6 +19,8 @@ namespace Report.Api
 
 
             var app = builder.Build();
+
+                app.UseMiddleware<ExceptionHandlingMiddleware>();
 
             app.UseCors(builder => builder
              .AllowAnyOrigin()

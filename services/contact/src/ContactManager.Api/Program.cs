@@ -1,3 +1,4 @@
+using ContactManager.Api.Middlewares;
 using ContactManager.Infrastructure;
 using ContactManager.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -20,8 +21,9 @@ namespace ContactManager.Api
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-
             var app = builder.Build();
+            
+                app.UseMiddleware<ExceptionHandlingMiddleware>();
 
             using (var scope = app.Services.CreateScope())
             {
